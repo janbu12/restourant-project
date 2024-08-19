@@ -1,13 +1,13 @@
+require('dotenv').config();
 const express = require('express');
-const supabase = require('@supabase/supabase-js');
-const db = supabase.createClient();
+const supabase = require('./supabaseClient');
 const cors = require('cors');
 // const blacklist = require('BlacklistToken.js');
 
 const routes = require('./routes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
