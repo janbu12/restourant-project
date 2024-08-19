@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Error from './error';
+import LandingPage from './pages/landing_page/LandingPage';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Home />}/>
+        <Route path='/' element={<LandingPage />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='*' element={<Error />} /> 
       </Routes>

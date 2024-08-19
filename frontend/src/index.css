@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .nav-link{
+        @apply px-4 py-3 hover:text-sky-600 hover:text-lg transition-all duration-300 rounded-lg;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
