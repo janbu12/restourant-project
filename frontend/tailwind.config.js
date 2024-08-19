@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {},
     screens: {
-      'phone': '475px',
+      'phone': '300px',
       'tablet': '640px',
       // => @media (min-width: 640px) { ... }
 
