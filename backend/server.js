@@ -25,6 +25,11 @@ app.use(express.urlencoded({ extended: true }));
 // });
 
 app.use('/api', routes());
+
+app.get('/',() => {
+  res.send('Hello This Is Database')
+  console.log('Hello This Is Database')
+})
   
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
