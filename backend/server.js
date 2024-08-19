@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', routes());
 
-app.get('/',() => {
+app.get('/',(req, res) => {
   res.send('Hello This Is Database')
   console.log('Hello This Is Database')
 })
