@@ -4,6 +4,10 @@ const supabase = require('./supabaseClient');
 
 
 module.exports = () =>{
+    router.get("/", (req, res) =>{
+        console.log("Selamat Datang")
+    })
+
     router.get('/partner', async (req, res) => {
         const data = await supabase.from("partner").select();
         res.json(data);
