@@ -51,7 +51,7 @@ export default function LandingPage() {
                 <div className='flex flex-col bg-white rounded-lg shadow-md p-4 gap-3'>
                   <h2 className='text-lg font-bold'>{item.name}</h2>
                   <p className='text-sm text-justify'>{item.description}</p>
-                  <p className='text-base text-sky-600'>Rp. {item.price}</p>
+                  <p className='text-sm text-sky-600'>Rp. {item.price}</p>
                   <Link to={`/menu/${item.id}`} className='text-sm text-blue-500 hover:text
                   -blue-700'></Link>
                 </div>
