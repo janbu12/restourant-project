@@ -27,8 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', routes());
 
 app.get('/',(req, res) => {
-  res.send('Hello This Is Database')
-  console.log('Hello This Is Database')
+  res.send('Hello This Is Database Restourant')
+  console.log('Hello This Is Database Restourant')
 })
   
 app.listen(PORT, () => {
