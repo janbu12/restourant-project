@@ -4,7 +4,7 @@ export default function Login() {
   return (
     <div className='w-full h-screen bg-slate-50 flex justify-center items-center'>
         <div 
-            className='flex flex-col items-center w-auto phone:min-w-[90%] h-auto bg-white rounded-lg drop-shadow-lg gap-8'>
+            className='flex flex-col items-center w-auto phone:min-w-[90%] laptop:min-w-[500px] h-auto bg-white rounded-lg drop-shadow-lg gap-8'>
             <div className='w-full border-b-2 py-5'>
                 <h2 className='text-center text-xl font-medium'>Login</h2>
             </div>
