@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import Navbar from '../../component/Navbar'
 import supabase from '../../hooks/supabaseClient';
 import Swal from 'sweetalert2';
@@ -133,7 +133,7 @@ export default function LandingPage() {
           </div>
         ) : (
           <>
-            <div className='bg-slate-50 w-full h-auto laptop:my-12 phone:px-8 laptop:px-24  phone:mt-24' id='menu'>
+            <div className='bg-slate-50 w-full h-auto laptop:my-12 phone:px-8 laptop:px-24 laptop:mt-24  phone:mt-24' id='menu'>
             <>
             <div className='mb-6'>
               <h2 className='laptop:text-7xl phone:text-5xl font-semibold text-orange-700'>Our <span className='text-orange-950'>Menu!</span></h2>

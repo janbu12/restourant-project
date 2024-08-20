@@ -1,7 +1,19 @@
 import React, { useState } from 'react'
+import { Link, useLocation} from 'react-router-dom'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const location = useLocation();
+  
+  const isActive = (path) => {
+    // Handle the case when pathname is '/' and hash is empty
+    if (path === '#home') {
+      return location.pathname === '/' && location.hash === '' || location.hash === '#home';
+    }
+    // Handle other paths
+    return location.hash === path;
+  };
 
   // Toggle menu visibility
   const toggleMenu = () => {
@@ -10,16 +22,16 @@ export default function Navbar() {
 
   return (
     <>
-      <div className='phone:hidden laptop:flex w-full h-auto laptop:justify-between laptop:items-center bg-white drop-shadow-md py-2 px-24'>
+      <div className='phone:hidden laptop:flex w-full h-auto fixed top-0 z-50 laptop:justify-between laptop:items-center bg-white drop-shadow-md py-2 px-24'>
         <div className=''>
           <h2 className='text-lg font-bold text-orange-950'>Logo.</h2>
         </div>
         <div className='laptop:flex gap-2 '>
-          <a href="#home" className='laptop:nav-link'>Home</a>
-          <a href="#menu" className='laptop:nav-link'>Menu</a>
-          <a href="#" className='laptop:nav-link'>About Us</a>
-          <a href="#partner" className='laptop:nav-link'>Partner</a>
-          <a href="#" className='laptop:nav-link'>Career</a>
+          <a href="#home" className={`laptop:nav-link ${isActive('#home') ? 'text-orange-700 text-lg' : ''}`}>Home</a>
+          <a href="#menu" className={`laptop:nav-link ${isActive('#menu') ? 'text-orange-700 text-lg' : ''}`}>Menu</a>
+          <a href="#aboutUs" className={`laptop:nav-link ${isActive('#aboutUs') ? 'text-orange-700 text-lg' : ''}`}>About Us</a>
+          <a href="#partner" className={`laptop:nav-link ${isActive('#partner') ? 'text-orange-700 text-lg' : ''}`}>Partner</a>
+          <a href="#carrer" className={`laptop:nav-link ${isActive('#carrer') ? 'text-orange-700 text-lg' : ''}`}>Career</a>
         </div>
         <div className=''>
         </div>
