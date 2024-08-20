@@ -31,7 +31,7 @@ export default function Navbar() {
         <div>
           <button 
             onClick={toggleMenu}
-            className='flex outline-none hover:text-orange-700 transition-all duration-200'
+            className={`flex outline-none ${isMenuOpen ?"text-orange-700":"text-orange-950"} transition-all duration-200`}
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className='size-10'>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
