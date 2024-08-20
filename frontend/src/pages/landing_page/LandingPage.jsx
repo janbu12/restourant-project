@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../../component/Navbar'
 import supabase from '../../hooks/supabaseClient';
+import Swal from 'sweetalert2';
 
 export default function LandingPage() {
   const [menu, setMenu] = useState([]);
@@ -12,6 +13,14 @@ export default function LandingPage() {
   const [phone, setPhone] = useState('');
 
   const maxLength = 255;
+
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'button-alert-con ml-1',
+      cancelButton: 'button-alert-can mr-1'
+    },
+    buttonsStyling: false
+  });
   
   async function getMenu(){
     setLoading(true);
@@ -45,6 +54,58 @@ export default function LandingPage() {
     }
   };
 
+  const handleInputPartner = () => {
+    setEmail("");
+    setName("");
+    setPhone("");
+    setText('');
+  }
+
+  async function handleSubmitPartner() {
+    const data = {
+      name: name,
+      email: email,
+      phone_number: phone,
+      message: text
+    };
+  
+    try {
+      setLoading(true);
+      const response = await fetch('https://restourant-project-backend.vercel.app/api/partner', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const result = await response.json();
+      console.log('Success:', result);
+      swalWithBootstrapButtons.fire({
+        title: "Send Partner!",
+        text: "Send Partner Message Has Successfully!",
+        icon: 'success',
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'button-alert-con ml-1',
+          cancelButton: 'button-alert-can mr-1'
+        },
+        buttonsStyling: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleInputPartner();
+          setLoading(false);
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
   useEffect(()=>{
     getMenu();
 
@@ -76,7 +137,7 @@ export default function LandingPage() {
           <div className='mb-6'>
             <h2 className='laptop:text-7xl phone:text-5xl font-semibold text-orange-700'>Our <span className='text-orange-950'>Menu!</span></h2>
           </div>
-          <div className='flex flex-wrap justify-around items-center gap-5'>
+          <div className='flex flex-wrap justify-between items-center gap-5'>
             {menu.map((item, index) => (
               <div key={index} className='w-1/2 phone:w-full md:w-1/3
               laptop:w-1/5 xl:w-1/5'>
@@ -108,7 +169,7 @@ export default function LandingPage() {
               <h2 className='mb-3 laptop:text-5xl font-medium text-orange-700 phone:text-3xl'>Opportunity!</h2>
               <p className='laptop:text-lg phone:text-base'>Sampaikan bagaimana kami bisa bekerja sama untuk mencapai tujuan Anda.</p>
             </div>
-            <form className='flex flex-col gap-3'>
+            <form className='flex flex-col gap-3' onSubmit={handleSubmitPartner}>
               <div className='flex flex-col gap-2'>
                 <label htmlFor="">Name</label>
                 <input
@@ -143,7 +204,8 @@ export default function LandingPage() {
               <div className='flex flex-col gap-2'>
                 <label htmlFor="">Message</label>
                 <textarea
-                  required 
+                  required
+                  value={text} 
                   className='resize-none w-full py-2 px-4 border border-gray-400 rounded' 
                   name="" 
                   id="" 
@@ -157,7 +219,7 @@ export default function LandingPage() {
               <div>
                 <button
                   className='bg-orange-700 py-3 w-full rounded-xl text-white hover:bg-orange-800 transition-all duration-300'
-                  type='sumbit'
+                  type='submit'
                 >
                   Send
                 </button>
