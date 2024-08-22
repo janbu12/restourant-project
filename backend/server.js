@@ -37,7 +37,6 @@ app.post('/signup', async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  // Simpan data pengguna di tabel pending_users
   const { data, error } = await supabase
     .from('pending_users')
     .insert([{ email, password:hashedPassword, name }]);
@@ -53,7 +52,6 @@ app.post('/signin', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Authenticate the user
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -63,11 +61,11 @@ app.post('/signin', async (req, res) => {
       return res.status(400).json({ error: error.message });
     }
 
-    // Return the user data and session token
     return res.status(200).json({
       message: 'Sign-in successful',
       accessToken: data.session.access_token,
       refreshToken: data.session.refresh_token,
+      email: data.session.user.email
     });
   } catch (error) {
     return res.status(500).json({ error: 'Server error' });
@@ -77,7 +75,6 @@ app.post('/signin', async (req, res) => {
 app.post('/approve_user', async (req, res) => {
   const { email } = req.body;
 
-  // Ambil data dari pending_users
   const { data: pendingUser, error } = await supabase
     .from('pending_users')
     .select('*')
@@ -88,23 +85,34 @@ app.post('/approve_user', async (req, res) => {
     return res.status(400).json({ error: 'Pengguna tidak ditemukan' });
   }
 
-  // Menggunakan hashed password dari tabel pending_users
   const { user, error: signUpError } = await supabase.auth.signUp({
     email: pendingUser.email,
-    password: pendingUser.password, // Hash password sudah aman untuk digunakan
+    password: pendingUser.password, 
   });
 
   if (signUpError) {
     return res.status(400).json({ error: signUpError.message });
   }
-
-  // Hapus dari pending_users
   await supabase
     .from('pending_users')
     .delete()
     .eq('email', email);
 
   res.status(200).json({ message: 'Pengguna berhasil disetujui.' });
+});
+
+app.post('/logout', async (req, res) => {
+  try {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      return res.status(400).json({ error: error.message });
+    }
+
+    return res.status(200).json({ message: 'Logout successful' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Server error' });
+  }
 });
   
 app.listen(PORT, () => {
