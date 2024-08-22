@@ -37,7 +37,7 @@ export default function Login() {
             password: password
         }
         setIsLoading(true);
-        const response = await fetch('http://localhost:3000/signin', {
+        const response = await fetch('https://restourant-project-backend.vercel.app/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
