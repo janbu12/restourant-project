@@ -5,7 +5,7 @@ export default function Admin() {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-        const response = await fetch('http://localhost:3000/logout', {
+        const response = await fetch('https://restourant-project-backend.vercel.app/logout', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
