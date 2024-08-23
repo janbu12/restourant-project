@@ -69,11 +69,13 @@ export default function Login() {
 
             navigate('/admin');
           } else {
-            swalWithBootstrapButtons.fire(
-                'Error',
-                'Invalid email or password',
-                'error'
-            )
+            swalWithBootstrapButtons.fire({
+                title:'Error',
+                text:'Invalid email or password',
+                icon:'error',
+                showConfirmButton:false,
+                timer:1000
+          })
           }
         setIsLoading(false);
     }
