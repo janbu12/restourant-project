@@ -66,10 +66,10 @@ export default function NavbarAdmin() {
             </div>
             <div className='flex gap-3 items-center text-orange-950'>
                 {/* <h2>{email}</h2> */}
-                <button onClick={toggleMenu} className={`rounded-full px-2 py-2 bg-orange-100 hover:bg-orange-50 transition-all duration-300 ${isMenuOpen ?"bg-orange-100":"bg-white"}`}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
+                <button onClick={toggleMenu} className={`rounded-full px-2 py-2 hover:bg-orange-50 transition-all duration-300 ${isMenuOpen ?"bg-orange-50":"bg-orange-100"}`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
                 </button>
                 <button className='flex bg-orange-100 hover:bg-orange-50 px-2 py-2 rounded-full transition-all duration-300'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
