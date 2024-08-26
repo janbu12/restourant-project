@@ -5,6 +5,12 @@ const supabase = require('./supabaseClient');
 
 module.exports = () =>{
     router.get('/partner', async (req, res) => {
+        const token = req.headers['authorization'];
+
+        if(!token){
+            return res.status(401).json({message: 'Unauthorized'});
+        }
+
         const data = await supabase.from("partner").select();
         res.json(data);
         // res.send('Meja');
