@@ -7,7 +7,7 @@ export default function PartnerAdmin() {
 
   const getPartner = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/partner", {
+      const response = await fetch("https://restourant-project-backend.vercel.app/api/partner", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
