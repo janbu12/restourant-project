@@ -12,7 +12,7 @@ module.exports = () =>{
         }
 
         const data = await supabase.from("partner").select();
-        res.json(data);
+        res.status(200).json(data);
         // res.send('Meja');
     });
 
