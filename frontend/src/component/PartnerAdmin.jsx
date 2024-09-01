@@ -6,13 +6,22 @@ export default function PartnerAdmin() {
   const [isLoading, setIsLoading] = useState(true); // Menambahkan state loading
   // const token = localStorage.getItem("accessToken");
 
-  const getPartner = async (token) => {
+  const getPartner = async () => {
+    const token = localStorage.getItem("accessToken");
+  
+    if (!token) {
+      console.warn("Token is not available");
+      return;
+    }
+  
+    if (isLoading) { // Jika sedang loading, return saja
+      console.log('Fetch is already in progress. Skipping this request.');
+      return;
+    }
+  
+    setIsLoading(true); // Set loading state
+  
     try {
-      setIsLoading(true); // Mulai loading
-      if (!token) {
-        console.error('No access token found');
-        return;
-      }
       const response = await fetch("https://restourant-project-backend.vercel.app/api/partner", {
         method: 'GET',
         headers: {
@@ -20,33 +29,32 @@ export default function PartnerAdmin() {
           'authorization': `Bearer ${token}`
         }
       });
-
+  
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
+  
       const { data } = await response.json();
-      console.log('Data fetched:', data);
+      console.log('Data fetched:', data); // Debugging output
       setPartner(data);
     } catch (error) {
       console.error('Fetch error:', error);
     } finally {
-      setIsLoading(false); // Selesai loading
+      setIsLoading(false); // Reset loading state
     }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("accessToken");
+    console.log("useEffect is triggered");
+    const token = localStorage.getItem("accessToken");
   
-      if (token) {
-        await getPartner(token); // Fetch data hanya jika token ada
-      }
-    };
+    if (token) {
+      console.log("Token found, fetching partner data.");
+      getPartner(); // Fetch data hanya jika token ada
+    } else {
+      console.log("No token found, skipping fetch.");
+    }
   
-    fetchData();
-    
-    // Supabase channel setup
     const channel = supabase
       .channel('public:partner')
       .on('postgres_changes', 
@@ -59,9 +67,11 @@ export default function PartnerAdmin() {
       .subscribe();
   
     return () => {
+      console.log('Cleaning up subscription');
       supabase.removeChannel(channel);
     };
-  }, []); // Tetap tidak ada dependensi
+  }, []); // Hanya on mount
+  
   
 
   if (isLoading) {
