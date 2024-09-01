@@ -3,12 +3,16 @@ import supabase from '../hooks/supabaseClient';
 
 export default function PartnerAdmin() {
   const [partner, setPartner] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Menambahkan state loading
   const token = localStorage.getItem("accessToken");
-
-  console.log("Token", token)
 
   const getPartner = async () => {
     try {
+      setIsLoading(true); // Mulai loading
+      if (!token) {
+        console.error('No access token found');
+        return;
+      }
       const response = await fetch("https://restourant-project-backend.vercel.app/api/partner", {
         method: 'GET',
         headers: {
@@ -21,17 +25,21 @@ export default function PartnerAdmin() {
         throw new Error('Network response was not ok');
       }
 
-      const {data} = await response.json();
-      console.log('Data fetched:', data); // Debugging output
+      const { data } = await response.json();
+      console.log('Data fetched:', data);
       setPartner(data);
     } catch (error) {
       console.error('Fetch error:', error);
+    } finally {
+      setIsLoading(false); // Selesai loading
     }
   };
 
   useEffect(() => {
-    getPartner(); // Initial data fetch
-  
+    if (token) { // Memastikan token ada sebelum fetch data
+      getPartner(); 
+    }
+
     const channel = supabase
       .channel('public:partner')
       .on('postgres_changes', 
@@ -42,12 +50,15 @@ export default function PartnerAdmin() {
         }
       )
       .subscribe();
-  
+
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
-  
+  }, [token]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className='my-24'>
