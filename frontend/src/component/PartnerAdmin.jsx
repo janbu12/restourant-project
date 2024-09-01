@@ -3,7 +3,7 @@ import supabase from '../hooks/supabaseClient';
 
 export default function PartnerAdmin() {
   const [partner, setPartner] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Menambahkan state loading
+  const [isLoading, setIsLoading] = useState(false); // Menambahkan state loading
   // const token = localStorage.getItem("accessToken");
 
   const getPartner = async () => {
@@ -40,7 +40,7 @@ export default function PartnerAdmin() {
     } catch (error) {
       console.error('Fetch error:', error);
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 
