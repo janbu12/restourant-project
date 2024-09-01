@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ element }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null); // null untuk menunjukkan loading state
+ const accessToken = localStorage.getItem("accessToken");
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setIsAuthenticated(true); // User is authenticated
-    } else {
-      setIsAuthenticated(false); // User is not authenticated
-    }
-  }, []);
+ console.log(accessToken)
 
-  if (isAuthenticated === null) {
-    // Tampilkan indikator loading atau tidak melakukan apa-apa
-    return <div>Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
+  if (!accessToken) {
     return <Navigate to="/login" />;
   }
 

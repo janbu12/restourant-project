@@ -67,7 +67,7 @@ export default function Login() {
             localStorage.setItem('email', email);
             localStorage.setItem('refreshToken', refreshToken);
 
-            navigate('/admin');
+            navigate('/admin/menu');
           } else {
             swalWithBootstrapButtons.fire({
                 title:'Error',

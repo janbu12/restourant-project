@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export default function NavbarAdmin() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    const location = useLocation();
 
     const email = localStorage.getItem("email");
 
@@ -17,6 +19,12 @@ export default function NavbarAdmin() {
       });
 
     const navigate = useNavigate();
+
+    const isActive = (path) => {
+        // Handle the case when pathname is '/' and hash is empty
+        console.log(location.pathname)
+        return location.pathname === path;
+      };
 
     const handleLogout = async () => {
         setIsLoading(true);
@@ -63,6 +71,11 @@ export default function NavbarAdmin() {
         <div className='flex justify-between fixed top-0 z-50 items-center w-full bg-white drop-shadow-md py-2.5 px-12'>
             <div className='text-xl font-bold text-orange-950'>
                 <h2>Logo.</h2>
+            </div>
+            <div className='laptop:flex gap-2 '>
+                <Link to="/admin/menu" className={`laptop:nav-link ${isActive('/admin/menu') ? 'text-orange-700 text-lg' : ''}`}>Menu</Link>
+                <Link to="/admin/partner" className={`laptop:nav-link ${isActive('/admin/partner') ? 'text-orange-700 text-lg' : ''}`}>Partner</Link>
+                <Link to="/admin/article" className={`laptop:nav-link ${isActive('/admin/article') ? 'text-orange-700 text-lg' : ''}`}>Article</Link>
             </div>
             <div className='flex gap-3 items-center text-orange-950'>
                 {/* <h2>{email}</h2> */}
