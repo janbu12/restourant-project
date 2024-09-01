@@ -72,7 +72,7 @@ export default function NavbarAdmin() {
             <div className='text-xl font-bold text-orange-950'>
                 <h2>Logo.</h2>
             </div>
-            <div className='laptop:flex gap-2 '>
+            <div className='laptop:flex phone:hidden gap-2 '>
                 <Link to="/admin/menu" className={`laptop:nav-link ${isActive('/admin/menu') ? 'text-orange-700 text-lg' : ''}`}>Menu</Link>
                 <Link to="/admin/partner" className={`laptop:nav-link ${isActive('/admin/partner') ? 'text-orange-700 text-lg' : ''}`}>Partner</Link>
                 <Link to="/admin/article" className={`laptop:nav-link ${isActive('/admin/article') ? 'text-orange-700 text-lg' : ''}`}>Article</Link>
@@ -97,7 +97,7 @@ export default function NavbarAdmin() {
 
         <div 
             className={` w-auto bg-white drop-shadow-md py-2 px-8 fixed top-0 right-14 z-30 rounded-lg ${isMenuOpen ? 'animate-slide-in' : 'animate-slide-out'}`}>
-            <div className='flex flex-col w-full justify-center items-center mt-16 gap-3 text-orange-950'>
+            <div className='flex flex-col w-full justify-center items-center mt-20 gap-3 text-orange-950'>
             <Link 
                 to={"/"} 
                 className='text-center marker:py-2 phone:text-lg font-medium laptop:text-base  hover:text-orange-700 transition-all duration-200' 

@@ -1,14 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import NavbarAdmin from '../../../component/NavbarAdmin';
-import PartnerAdmin from '../../../component/PartnerAdmin';
+import MenuAdmin from '../../../component/MenuAdmin';
+import NavigationHp from '../../../component/NavigationHp';
 
 export default function AdminMenu() {
     
   return (
     <>
         <NavbarAdmin />
-        {/* <PartnerAdmin/> */}
+        <MenuAdmin/>
+        <NavigationHp/>
         {/* <button onClick={handleLogout} className='button-alert-con'>Logout</button> */}
     </>
   )
