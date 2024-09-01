@@ -5,6 +5,8 @@ export default function PartnerAdmin() {
   const [partner, setPartner] = useState([]);
   const token = localStorage.getItem("accessToken");
 
+  console.log("Token", token)
+
   const getPartner = async () => {
     try {
       const response = await fetch("https://restourant-project-backend.vercel.app/api/partner", {
