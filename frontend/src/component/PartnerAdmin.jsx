@@ -4,9 +4,9 @@ import supabase from '../hooks/supabaseClient';
 export default function PartnerAdmin() {
   const [partner, setPartner] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Menambahkan state loading
-  const token = localStorage.getItem("accessToken");
+  // const token = localStorage.getItem("accessToken");
 
-  const getPartner = async () => {
+  const getPartner = async (token) => {
     try {
       setIsLoading(true); // Mulai loading
       if (!token) {
@@ -36,10 +36,17 @@ export default function PartnerAdmin() {
   };
 
   useEffect(() => {
-    if (token) { // Memastikan token ada sebelum fetch data
-      getPartner(); 
-    }
-
+    const fetchData = async () => {
+      const token = localStorage.getItem("accessToken");
+  
+      if (token) {
+        await getPartner(token); // Fetch data hanya jika token ada
+      }
+    };
+  
+    fetchData();
+    
+    // Supabase channel setup
     const channel = supabase
       .channel('public:partner')
       .on('postgres_changes', 
@@ -50,11 +57,12 @@ export default function PartnerAdmin() {
         }
       )
       .subscribe();
-
+  
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [token]);
+  }, []); // Tetap tidak ada dependensi
+  
 
   if (isLoading) {
     return <div>Loading...</div>;
