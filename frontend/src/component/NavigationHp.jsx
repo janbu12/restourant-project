@@ -8,7 +8,7 @@ export default function NavigationHp() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-40">
       <div className="phone:flex laptop:hidden justify-around items-center py-2">
         {/* Menu Button */}
         <Link

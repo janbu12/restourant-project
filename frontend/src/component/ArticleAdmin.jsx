@@ -53,7 +53,7 @@ const ArticleAdmin = () => {
           </div>
 
           {/* Wrapper for Swiper */}
-          <div className="relative w-full px-6">
+          <div className="relative w-full px-4">
             <Swiper
               modules={[Pagination]}
               spaceBetween={20}
