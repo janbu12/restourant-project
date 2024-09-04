@@ -75,17 +75,16 @@ export default function MenuAdmin() {
 
     try {
       const url = isEditing 
-        ? `https://restourant-project-backend.vercel.app/api/menu/${formData.id}` 
+        ? `http://localhost:3000/api/menu/${formData.id}` 
         : 'https://restourant-project-backend.vercel.app/api/menu';
       
       const method = isEditing ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
         method: method,
-        // headers: {
-        //   'Content-Type': 'application/json',
-        //   'Authorization': `Bearer ${token}`
-        // },
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         body: newFormData
       });
       
