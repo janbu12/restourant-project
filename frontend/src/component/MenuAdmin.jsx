@@ -75,7 +75,7 @@ export default function MenuAdmin() {
 
     try {
       const url = isEditing 
-        ? `http://localhost:3000/api/menu/${formData.id}` 
+        ? `https://restourant-project-backend.vercel.app/api/menu/${formData.id}` 
         : 'https://restourant-project-backend.vercel.app/api/menu';
       
       const method = isEditing ? 'PUT' : 'POST';
