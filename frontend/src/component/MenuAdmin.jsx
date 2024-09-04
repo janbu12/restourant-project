@@ -62,6 +62,8 @@ export default function MenuAdmin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true); // Set submitting state to true
+    const token = localStorage.getItem("accessToken");
+
     
     const newFormData = new FormData();
     newFormData.append('name', formData.name);
@@ -80,6 +82,10 @@ export default function MenuAdmin() {
       
       const response = await fetch(url, {
         method: method,
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'Authorization': `Bearer ${token}`
+        // },
         body: newFormData
       });
       
